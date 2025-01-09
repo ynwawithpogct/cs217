@@ -6,6 +6,15 @@ list_search = []
 list_search_temp = []
 list_query = []
 
+# def get_suggestions():
+#     list_all = tree.search_laws()
+#     loiViPham_suggestions = list(set([item['loiViPham'] for item in list_all]))
+#     phuongTien_suggestions = list(set([item['phuongTien'] for item in list_all]))
+#     chiTietLoi_suggestions = list(set([item['chiTietLoi'] for item in list_all]))
+#     return loiViPham_suggestions, phuongTien_suggestions, chiTietLoi_suggestions
+
+# loiViPham_suggestions, phuongTien_suggestions, chiTietLoi_suggestions = get_suggestions()
+# print(loiViPham_suggestions, phuongTien_suggestions, chiTietLoi_suggestions)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -33,19 +42,24 @@ def search():
     form3 = homeForm()
 
     global list_search, list_search_temp
+    global loiViPham_suggestions, phuongTien_suggestions, chiTietLoi_suggestions
     
     if form1.validate_on_submit() and form1.submit.data:
-        loivipham = None if form1.loivipham.data is None or form1.loivipham.data == "" else form1.loivipham.data
-        phuongTien = None if form1.phuongTien.data is None or form1.phuongTien.data == "" else form1.phuongTien.data
-        chiTietLoi = None if form1.chiTietLoi.data is None or form1.chiTietLoi.data == "" else form1.chiTietLoi.data
+        loivipham = None if form1.loivipham.data is None or form1.loivipham.data == "None" else form1.loivipham.data
+        phuongTien = None if form1.phuongTien.data is None or form1.phuongTien.data == "None" else form1.phuongTien.data
+        chiTietLoi = None if form1.chiTietLoi.data is None or form1.chiTietLoi.data == "None" else form1.chiTietLoi.data
+        # print(form1.chiTietLoi.data is None)
         temp_list_search = tree.search_laws(loivipham, phuongTien, chiTietLoi)
+        # print(loivipham, phuongTien, form1.chiTietLoi.data, chiTietLoi)
+        # print(type(loivipham), type(phuongTien), type(chiTietLoi))
         if len(temp_list_search) == 0:
             # print("Submit không thành công")
-            return render_template('search.html', form=form1, nextForm=form2, listIsEmty=True)
+            return render_template('search.html', form=form1, nextForm=form2, homeForm=form3, listIsEmty=True)
         list_search = temp_list_search
         list_search_temp = [item for item in list_search if item not in list_query]
         return redirect(url_for('search_list'))
     if form2.validate_on_submit() and form2.next.data:
+        print(form1.loivipham.data)
         if len(list_search) == 0:
             # print("Next không thành công")
             return render_template('search.html', form=form1, nextForm=form2, homeForm=form3, listIsEmty=True)

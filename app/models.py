@@ -93,6 +93,8 @@ class ViolationTree:
             self.print_tree(child, level + 1)
 
     def search_laws(self, loiViPham=None, phuongTien=None, chiTietLoi=None):
+        # print(loiViPham, phuongTien, chiTietLoi)
+        # print(type(loiViPham), type(phuongTien), type(chiTietLoi))
         """
         Tìm kiếm luật dựa trên các tham số: loiViPham, phuongTien, chiTietLoi.
 
@@ -114,17 +116,17 @@ class ViolationTree:
         
         # Tìm trong tầng 1: loiViPham
         for loi_key, loi_node in self.root.children.items():
-            if loiViPham and loi_key != loiViPham:
+            if loiViPham is not None and loi_key != loiViPham:
                 continue  # Bỏ qua nếu không khớp loiViPham
             
             # Tìm trong tầng 2: phuongTien
             for phuong_key, phuong_node in loi_node.children.items():
-                if phuongTien and phuong_key != phuongTien:
+                if phuongTien is not None and phuong_key != phuongTien:
                     continue  # Bỏ qua nếu không khớp phuongTien
                 
                 # Tìm trong tầng 3: chiTietLoi
                 for chi_key, chi_node in phuong_node.children.items():
-                    if chiTietLoi and chi_key != chiTietLoi:
+                    if chiTietLoi is not None and chi_key != chiTietLoi:
                         continue  # Bỏ qua nếu không khớp chiTietLoi
                     
                     # Thêm luật vào kết quả
