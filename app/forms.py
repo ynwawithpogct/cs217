@@ -31,9 +31,9 @@ def at_least_one_required(form, field):
 #     submit = SubmitField('Tìm Các Lỗi Phạt Thỏa Điều Kiện')
 
 class violationForm(FlaskForm):
-    loivipham = SelectField('loivipham', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(loiViPham_suggestions)], validators=[])
-    phuongTien = SelectField('phuongTien', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(phuongTien_suggestions)], validators=[])
-    chiTietLoi = SelectField('chiTietLoi', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(chiTietLoi_suggestions)], validators=[])
+    loivipham = SelectField('loivipham', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(loiViPham_suggestions)], default=None, validators=[])
+    phuongTien = SelectField('phuongTien', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(phuongTien_suggestions)], default=None, validators=[])
+    chiTietLoi = SelectField('chiTietLoi', choices=[(None, "Trống")]+[(item, item) for i, item in enumerate(chiTietLoi_suggestions)], default=None, validators=[])
     submit = SubmitField('Tìm Các Lỗi Phạt Thỏa Điều Kiện')
     
 class nextForm(FlaskForm):

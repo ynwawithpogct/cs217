@@ -97,15 +97,15 @@
         {{ form.hidden_tag() }}
         <div class="form-group">
             <label for="loivipham">Loại vi phạm:</label>
-            {{ form.loivipham(class="string-submit-button", size=100) }}  <!-- Hiển thị trường loivipham -->
+            {{ form.loivipham(class="string-submit-button") }}  <!-- Hiển thị trường loivipham -->
         </div>
         <div class="form-group">
             <label for="phuongTien">Phương tiện:</label>
-            {{ form.phuongTien(class="string-submit-button", size=100) }}  <!-- Hiển thị trường phuongtien -->
+            {{ form.phuongTien(class="string-submit-button") }}  <!-- Hiển thị trường phuongtien -->
         </div>
         <div class="form-group">
             <label for="chiTietLoi">Chi tiết lỗi:</label>
-            {{ form.chiTietLoi(class="string-submit-button", size=100) }}  <!-- Hiển thị trường chitietloi -->
+            {{ form.chiTietLoi(class="string-submit-button") }}  <!-- Hiển thị trường chitietloi -->
         </div>
         <div class="form-group">
             {{ form.submit(class="form-submit-button") }}  <!-- Hiển thị nút submit -->
@@ -113,7 +113,7 @@
     </form>
     {% if listIsEmty %}
     <div id="listEmty">
-        <h2>Danh sách tìm kiếm rỗng</h2>
+        <h2>Không Tìm Thấy Danh Sách Tìm Kiếm</h2>
     </div>
     {% endif %}
     
