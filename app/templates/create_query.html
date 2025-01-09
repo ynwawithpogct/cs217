@@ -111,6 +111,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="violationListTableHeader">STT</th>
                     <th class="violationListTableHeader">Lỗi Vi Phạm</th>
                     <th class="violationListTableHeader">Phương Tiện</th>
                     <th class="violationListTableHeader">Chi Tiết Lỗi</th>
@@ -123,6 +124,7 @@
             <tbody>
                 {% for searched_item in list_search_temp %}
                     <tr>
+                        <td class="violationListTable">{{ loop.index }}</td>
                         {% for key, value in searched_item.items() %}
                             <td class="violationListTable">{{ value }}</td>
                         {% endfor %}
@@ -139,6 +141,7 @@
         <table>
             <thead>
                 <tr>
+                    <th class="violationListTableHeader">STT</th>
                     <th class="violationListTableHeader">Lỗi Vi Phạm</th>
                     <th class="violationListTableHeader">Phương Tiện</th>
                     <th class="violationListTableHeader">Chi Tiết Lỗi</th>
@@ -151,6 +154,7 @@
             <tbody>
                 {% for searched_item in list_query %}
                     <tr>
+                        <td class="violationListTable">{{ loop.index }}</td>
                         {% for key, value in searched_item.items() %}
                             <td class="violationListTable">{{ value }}</td>
                         {% endfor %}
