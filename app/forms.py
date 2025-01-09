@@ -18,7 +18,7 @@ class violationForm(FlaskForm):
     loivipham = StringField('loivipham', validators=[at_least_one_required])
     phuongTien = StringField('phuongTien', validators=[at_least_one_required])
     chiTietLoi = StringField('chiTietLoi', validators=[at_least_one_required])
-    submit = SubmitField('Tìm các lỗi thỏa điều kiện')
+    submit = SubmitField('Tìm Các Lỗi Phạt Thỏa Điều Kiện')
     
 class nextForm(FlaskForm):
     next = SubmitField('Next')
@@ -30,10 +30,10 @@ class homeForm(FlaskForm):
     home = SubmitField('Home')
 
 class searchForm(FlaskForm):
-    search = SubmitField('Tìm Kiếm Các Lỗi')
+    search = SubmitField('Tìm Kiếm Các Lỗi Phạt')
     
 class queryForm(FlaskForm):
-    query = SubmitField('Thêm các lỗi')
+    query = SubmitField('Thêm Các lỗi Phạt')
     
 class clearQuerry(FlaskForm):
     clear = SubmitField('Clear')
