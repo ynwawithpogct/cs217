@@ -15,9 +15,9 @@ def index():
         return redirect(url_for('search'))
     if form2.validate_on_submit() and form2.query.data:
         global list_query, list_search, list_search_temp
-        list_query = []
+        # list_query = []
         list_search = tree.search_laws()
-        list_search_temp = list_search
+        list_search_temp = [item for item in list_search if item not in list_query]
         return redirect(url_for('create_query'))
     return render_template('index.html', searchForm=form1, queryForm=form2)
 
@@ -123,8 +123,8 @@ def create_query():
 
 @app.route('/calculate_penalty', methods=['GET', 'POST'])
 def calculate_penalty():
-    global list_search
-    if len(list_search) == 0:
+    global list_query
+    if len(list_query) == 0:
         return redirect(url_for('create_query'))
     penalty = tree.calculate_total_penalty_with_details(list_query)
     form1 = backForm()
