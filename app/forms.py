@@ -15,9 +15,9 @@ def at_least_one_required(form, field):
         raise ValidationError("At least one field must be filled.")
 
 class violationForm(FlaskForm):
-    loivipham = StringField('loivipham', validators=[at_least_one_required])
-    phuongTien = StringField('phuongTien', validators=[at_least_one_required])
-    chiTietLoi = StringField('chiTietLoi', validators=[at_least_one_required])
+    loivipham = StringField('loivipham', validators=[])
+    phuongTien = StringField('phuongTien', validators=[])
+    chiTietLoi = StringField('chiTietLoi', validators=[])
     submit = SubmitField('Tìm Các Lỗi Phạt Thỏa Điều Kiện')
     
 class nextForm(FlaskForm):
