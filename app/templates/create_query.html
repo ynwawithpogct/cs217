@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm Bớt Lỗi Vi Phạm Giao Thông</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        #violationList {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+        #violationList table {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            border-collapse: collapse; /* Đảm bảo không có khoảng cách giữa các ô */
+            margin: 20px 0;
+        }
+        #violationList ul {
+            list-style: none;
+            padding: 0;
+        }
+        #violationList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+        #violationList button {
+            width: 30px;
+            height: 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .violationListTable {
+            border: 1px solid black; /* Kẻ viền xung quanh ô */
+            padding: 8px;
+            text-align: center;
+        }
+        .violationListTableHeader {
+            border: 1px solid black; /* Kẻ viền xung quanh ô */
+            padding: 8px;
+            text-align: center;
+            background-color: #f2f2f2; /* Đổi màu nền của header */
+        }
+        .nextFooter{
+            text-align: right;
+        }
+        .form-container {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between; /* Căn form về hai góc trái và phải */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            padding: 10px;
+        }
+        .form-container form {
+            padding: 10px;
+            font-size: 16px;
+            margin: 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-back-button {
+            padding: 10px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .form-next-button {
+            padding: 10px;
+            font-size: 16px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Thêm Bớt Lỗi Vi Phạm Giao Thông</h1>
+    <div id="violationList">
+        <h2>Danh Sách Lỗi Đã Tìm Được</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="violationListTableHeader">Lỗi Vi Phạm</th>
+                    <th class="violationListTableHeader">Phương Tiện</th>
+                    <th class="violationListTableHeader">Chi Tiết Lỗi</th>
+                    <th class="violationListTableHeader">Mức Phạt</th>
+                    <th class="violationListTableHeader">Phạt Bổ Sung</th>
+                    <th class="violationListTableHeader">Căn Cứ Pháp Lý</th>
+                    <th class="violationListTableHeader">Thêm</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for searched_item in list_search_temp %}
+                    <tr>
+                        {% for key, value in searched_item.items() %}
+                            <td class="violationListTable">{{ value }}</td>
+                        {% endfor %}
+                        <td class="violationListTable">
+                            <a href="{{ url_for('add_query', index=loop.index0) }}">+</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div id="violationList">
+        <h2>Danh Dách Lỗi</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th class="violationListTableHeader">Lỗi Vi Phạm</th>
+                    <th class="violationListTableHeader">Phương Tiện</th>
+                    <th class="violationListTableHeader">Chi Tiết Lỗi</th>
+                    <th class="violationListTableHeader">Mức Phạt</th>
+                    <th class="violationListTableHeader">Phạt Bổ Sung</th>
+                    <th class="violationListTableHeader">Căn Cứ Pháp Lý</th>
+                    <th class="violationListTableHeader">Bớt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for searched_item in list_query %}
+                    <tr>
+                        {% for key, value in searched_item.items() %}
+                            <td class="violationListTable">{{ value }}</td>
+                        {% endfor %}
+                        <td class="violationListTable">
+                            <a href="{{ url_for('remove_query', index=loop.index0) }}">-</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <form id="clearQuerry"  method="POST">
+                        {{ clearQuerry.hidden_tag() }}
+                        <div id="nextFooter" class="nextFooter">
+                            {{ clearQuerry.clear(class="clear-querry-button") }}  <!-- clearQuerry -->
+                        </div>
+                    </form>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-container">
+        <form id="backForm"  method="POST">
+            {{ backForm.hidden_tag() }}
+            <div id="Footer">
+                {{ backForm.back(class="form-back-button") }}  <!-- next -->
+            </div>
+        </form>
+        <form id="nextForm"  method="POST">
+            {{ nextForm.hidden_tag() }}
+            <div id="nextFooter" class="nextFooter">
+                {{ nextForm.next(class="form-next-button") }}  <!-- next -->
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

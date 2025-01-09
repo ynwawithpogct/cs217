@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm Lỗi Vi Phạm Giao Thông</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-submit-button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        .string-submit-button {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+        }
+        #listEmty {
+            height: 30px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .form-next-button {
+            padding: 10px;
+            font-size: 16px;
+            text-align: right;
+        }
+        #violationForm {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+        }
+        #Footer {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+            text-align: right;
+        }
+        .nextFooter{
+            text-align: right;
+        }
+        .form-container {
+            margin-top: 20px;
+            border-top: 2px solid #ccc;
+            padding-top: 10px;
+            display: flex;
+            justify-content: space-between; /* Căn form về hai góc trái và phải */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            padding: 10px;
+        }
+        .form-container form {
+            padding: 10px;
+            font-size: 16px;
+            margin: 0;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form-home-button {
+            padding: 10px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .form-next-button {
+            padding: 10px;
+            font-size: 16px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Tìm Kiếm Lỗi Vi Phạm Giao Thông</h1>
+    <form id="violationForm"  method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            <label for="loivipham">Loại vi phạm:</label>
+            {{ form.loivipham(class="string-submit-button", size=100) }}  <!-- Hiển thị trường loivipham -->
+        </div>
+        <div class="form-group">
+            <label for="phuongTien">Phương tiện:</label>
+            {{ form.phuongTien(class="string-submit-button", size=100) }}  <!-- Hiển thị trường phuongtien -->
+        </div>
+        <div class="form-group">
+            <label for="chiTietLoi">Chi tiết lỗi:</label>
+            {{ form.chiTietLoi(class="string-submit-button", size=100) }}  <!-- Hiển thị trường chitietloi -->
+        </div>
+        <div class="form-group">
+            {{ form.submit(class="form-submit-button") }}  <!-- Hiển thị nút submit -->
+        </div>
+    </form>
+    {% if listIsEmty %}
+    <div id="listEmty">
+        <h2>Danh sách tìm kiếm rỗng</h2>
+    </div>
+    {% endif %}
+    
+    <div class="form-container">
+        <form id="homeForm"  method="POST">
+            {{ homeForm.hidden_tag() }}
+            <div id="Footer">
+                {{ homeForm.home(class="form-home-button") }}  <!-- home -->
+            </div>
+        </form>
+        <form id="nextForm"  method="POST">
+            {{ nextForm.hidden_tag() }}
+            <div id="nextFooter" class="nextFooter">
+                {{ nextForm.next(class="form-next-button") }}  <!-- next -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>
