@@ -79,7 +79,7 @@ def search_list():
         return redirect(url_for('search'))
     if form2.validate_on_submit() and form2.next.data:
         return redirect(url_for('create_query'))
-    return render_template('search_list.html', backForm=form1, nextForm=form2, list_search=list_search_temp)
+    return render_template('search_list.html', backForm=form1, nextForm=form2, list_search=list_search)
 
 @app.route('/add_query/<index>')
 def add_query(index):
